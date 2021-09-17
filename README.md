@@ -67,7 +67,7 @@ invokevirtual,android.net.wifi.WifiManager,getConnectionInfo,获取 WIFI 信息
     "文件 location.jar 中的 com/ds.<init>() 方法调用了 SensorManager.getDefaultSensor()，获取传感器信息"
   ],
   "android/telephony/TelephonyManager 获取手机 ID 信息": [
-    "文件 oss-android-sdk-2.8.3.aar 中的 com/common/utils/Utils.getOperatorName() 方法调用了 TelephonyManager.getSimOperator()，获取手机 ID 信息",
+    "文件 osdk.aar 中的 com/common/utils/Utils.getOperatorName() 方法调用了 TelephonyManager.getSimOperator()，获取手机 ID 信息",
     "文件 bccxxx.aar 中的 com/smartlink/util/a.a() 方法调用了 TelephonyManager.getDeviceId()，获取手机 ID 信息"
   ],
   "android/content/pm/PackageManager 获取已安装应用列表": [],
