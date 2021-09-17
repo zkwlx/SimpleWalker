@@ -6,6 +6,9 @@ import java.io.InputStream
 import java.lang.IllegalArgumentException
 import java.util.zip.ZipInputStream
 
+/**
+ * .aar 文件的遍历器，就是多一层 zip 解压
+ */
 object AarWalker : WalkerForASM() {
 
     private const val DOT_CLASS = ".class"

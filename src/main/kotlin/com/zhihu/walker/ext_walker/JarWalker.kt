@@ -1,11 +1,12 @@
 package com.zhihu.walker.ext_walker
 
-import com.zhihu.walker.Log
 import java.io.File
 import java.io.FileInputStream
-import java.lang.IllegalArgumentException
 import java.util.zip.ZipInputStream
 
+/**
+ * .jar 文件遍历器
+ */
 object JarWalker : WalkerForASM() {
 
     private const val DOT_CLASS = ".class"

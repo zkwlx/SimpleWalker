@@ -8,6 +8,9 @@ import org.objectweb.asm.ClassVisitor
 import java.io.File
 import java.io.InputStream
 
+/**
+ * 使用 ASM 遍历每个 .class
+ */
 abstract class WalkerForASM {
 
     abstract fun getExt(): String
