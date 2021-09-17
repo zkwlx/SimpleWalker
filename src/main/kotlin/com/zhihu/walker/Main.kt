@@ -27,10 +27,10 @@ class Main {
         fun main(vararg args: String) {
             val myArgs = Args()
             val commander = JCommander.newBuilder().addObject(myArgs).build()
+            commander.setProgramName("SimpleWalker","一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式")
             try {
                 commander.parse(*args)
             } catch (e: Throwable) {
-                e.printStackTrace()
                 commander.usage()
                 return
             }
