@@ -1,5 +1,6 @@
-package com.zhihu.walker
+package com.zhihu.walker.ext_walker
 
+import com.zhihu.walker.Log
 import java.io.File
 import java.io.FileInputStream
 import java.lang.IllegalArgumentException
@@ -23,8 +24,7 @@ object JarWalker : WalkerForASM() {
                 if (!entry.isDirectory && entry.name.endsWith(DOT_CLASS)) {
                     accept(jarFile, zis)
                 } else {
-                    // Do not copy resources
-                    Log.i("非 $DOT_CLASS 文件不处理: ${entry.name}")
+//                    Log.i("非 $DOT_CLASS 文件不处理: ${entry.name}")
                 }
                 entry = zis.nextEntry
             }

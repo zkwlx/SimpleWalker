@@ -1,4 +1,4 @@
-package com.zhihu.walker
+package com.zhihu.walker.ext_walker
 
 import java.io.File
 import java.io.FileInputStream
@@ -24,7 +24,7 @@ object AarWalker : WalkerForASM() {
             var entry = zis.nextEntry
             while (entry != null) {
                 if (!entry.isDirectory && entry.name.endsWith(DOT_JAR)) {
-                    walkJarInputStream(zis)
+                    walkJarInputStream(aarFile, zis)
                 } else {
 //                    Log.i("非 $DOT_JAR 文件不处理: ${entry.name}")
                 }
@@ -33,13 +33,13 @@ object AarWalker : WalkerForASM() {
         }
     }
 
-    private fun walkJarInputStream(input: InputStream) {
+    private fun walkJarInputStream(file: File, input: InputStream) {
         // 不 close
         ZipInputStream(input).let { zis ->
             var entry = zis.nextEntry
             while (entry != null) {
                 if (!entry.isDirectory && entry.name.endsWith(DOT_CLASS)) {
-                    accept(zis)
+                    accept(file, zis)
                 } else {
 //                    Log.i("非 $DOT_CLASS 文件不处理: ${entry.name}")
                 }
