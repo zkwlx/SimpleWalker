@@ -14,3 +14,4 @@ invokevirtual,android.nfc.NfcAdapter,all,获取 NFC 信息
 invokevirtual,android.app.ActivityManager,getRunningAppProcesses,获取正在运行的应用列表
 invokevirtual,android.hardware.SensorManager,all,获取传感器信息
 invokevirtual,android.net.wifi.WifiManager,getConnectionInfo,获取 WIFI 信息
+invokevirtual,android.location.LocationManager,all,获取位置信息
