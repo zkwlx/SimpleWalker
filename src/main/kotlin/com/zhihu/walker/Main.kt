@@ -93,7 +93,7 @@ class Main {
 
         private fun onFinish(outputPath: String) {
             val outputFile = File(outputPath)
-            outputFile.writeText(Context.outputJson.toString())
+            outputFile.writeText(Context.outputJson.toString(4))
             Log.i("报告文件：${outputFile.absolutePath}")
         }
     }
