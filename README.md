@@ -4,7 +4,7 @@
 # 使用方法
 项目工程中 release/ 目录下是最新版本的可执行文件，help 输出如下：
 ``` bash
-zkw@zkw-mint: java -jar ./SimpleWalker-1.0.jar
+zkw@zkw-mint: java -jar ./SimpleWalker-1.1.jar
 Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式) [options]
   Options:
     -h, --help
@@ -19,7 +19,7 @@ Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配
 ```
 根据参数制定输入文件和策略配置文件：
 ``` bash
-zkw@zkw-mint: java -jar ./release/SimpleWalker-1.0.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
+zkw@zkw-mint: java -jar ./release/SimpleWalker-1.1.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
 报告文件：/home/zkw/my_project/SimpleWalker/result.json
 ```
 其中默认配置文件 policy 的内容如下：
@@ -83,3 +83,11 @@ invokevirtual,android.net.wifi.WifiManager,getConnectionInfo,获取 WIFI 信息
 }
 ```
 从报告中可以看到 jar 或 aar 包中的 class 中对敏感函数的调用关系，使用者可以根据此报告对第三方 SDK 做简单判断。
+# 编译方法
+``` bash
+./gradlew jar
+```
+jar 文件的输出目录是
+``` bash
+./build/libs/SimpleWalker-x.x.jar
+```
