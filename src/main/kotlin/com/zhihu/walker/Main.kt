@@ -1,9 +1,7 @@
 package com.zhihu.walker
 
 import com.beust.jcommander.JCommander
-import com.zhihu.walker.ext_walker.AarWalker
-import com.zhihu.walker.ext_walker.JarWalker
-import com.zhihu.walker.ext_walker.WalkerForASM
+import com.zhihu.walker.ext_walker.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -15,11 +13,12 @@ class Main {
     companion object {
 
         private val walkerMap = mapOf(
-            create(JarWalker),
-            create(AarWalker)
+//            create(JarWalker),
+//            create(AarWalker),
+            create(DexWalker)
         )
 
-        private fun create(walker: WalkerForASM): Pair<String, WalkerForASM> {
+        private fun create(walker: Walker): Pair<String, Walker> {
             return walker.getExt() to walker
         }
 
@@ -27,7 +26,7 @@ class Main {
         fun main(vararg args: String) {
             val myArgs = Args()
             val commander = JCommander.newBuilder().addObject(myArgs).build()
-            commander.setProgramName("SimpleWalker","一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式")
+            commander.setProgramName("SimpleWalker", "一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式")
             try {
                 commander.parse(*args)
             } catch (e: Throwable) {
@@ -83,7 +82,7 @@ class Main {
 
         private fun doWalk(file: File) {
             walkerMap[file.extension].also {
-                if (it != null) {
+                if (it != null && it.verifyExt(file)) {
                     it.walk(file)
                 } else {
                     Log.i("不支持文件格式 ${file.absolutePath}")

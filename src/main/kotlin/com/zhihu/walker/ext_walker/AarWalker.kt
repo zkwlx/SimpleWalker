@@ -3,7 +3,6 @@ package com.zhihu.walker.ext_walker
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
-import java.lang.IllegalArgumentException
 import java.util.zip.ZipInputStream
 
 /**
@@ -19,15 +18,12 @@ object AarWalker : WalkerForASM() {
         return "aar"
     }
 
-    override fun walk(aarFile: File) {
-        if (!aarFile.name.endsWith(getExt())) {
-            throw IllegalArgumentException("文件类型不是 aar：${aarFile.absoluteFile}")
-        }
-        ZipInputStream(FileInputStream(aarFile)).use { zis ->
+    override fun walk(file: File) {
+        ZipInputStream(FileInputStream(file)).use { zis ->
             var entry = zis.nextEntry
             while (entry != null) {
                 if (!entry.isDirectory && entry.name.endsWith(DOT_JAR)) {
-                    walkJarInputStream(aarFile, zis)
+                    walkJarInputStream(file, zis)
                 } else {
 //                    Log.i("非 $DOT_JAR 文件不处理: ${entry.name}")
                 }

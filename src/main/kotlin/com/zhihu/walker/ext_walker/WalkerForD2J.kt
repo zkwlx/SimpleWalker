@@ -1,17 +1,20 @@
 package com.zhihu.walker.ext_walker
 
+import com.zhihu.walker.visitor.DexFileRootVisitor
 import com.zhihu.walker.visitor.GetStaticVisitor
 import com.zhihu.walker.visitor.InvokeSpecialVisitor
 import com.zhihu.walker.visitor.InvokeVirtualVisitor
+import d2j.api.visitors.DexFileVisitor
+import d2j.reader.DexFileReader
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import java.io.File
 import java.io.InputStream
 
 /**
- * 使用 ASM 遍历每个 .class
+ * 使用 d2j 遍历每个 dex
  */
-abstract class WalkerForASM : Walker() {
+abstract class WalkerForD2J : Walker() {
 
     /**
      * @param file File 类型对象，用于获取被扫描的文件信息
@@ -19,13 +22,11 @@ abstract class WalkerForASM : Walker() {
      */
     internal fun accept(file: File, input: InputStream) {
         val visitor = buildClassVisitor(file)
-        ClassReader(input).accept(visitor, ClassReader.EXPAND_FRAMES)
+        DexFileReader(input).accept(visitor)
     }
 
-    private fun buildClassVisitor(file: File): ClassVisitor {
-        var visitor: ClassVisitor = InvokeVirtualVisitor(file)
-        visitor = InvokeSpecialVisitor(file, visitor)
-        visitor = GetStaticVisitor(file, visitor)
+    private fun buildClassVisitor(file: File): DexFileVisitor {
+        var visitor: DexFileVisitor = DexFileRootVisitor(file)
         return visitor
     }
 

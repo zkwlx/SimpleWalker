@@ -15,15 +15,12 @@ object JarWalker : WalkerForASM() {
         return "jar"
     }
 
-    override fun walk(jarFile: File) {
-        if (!jarFile.name.endsWith(getExt())) {
-            throw IllegalArgumentException("文件类型不是 jar：${jarFile.absoluteFile}")
-        }
-        ZipInputStream(FileInputStream(jarFile)).use { zis ->
+    override fun walk(file: File) {
+        ZipInputStream(FileInputStream(file)).use { zis ->
             var entry = zis.nextEntry
             while (entry != null) {
                 if (!entry.isDirectory && entry.name.endsWith(DOT_CLASS)) {
-                    accept(jarFile, zis)
+                    accept(file, zis)
                 } else {
 //                    Log.i("非 $DOT_CLASS 文件不处理: ${entry.name}")
                 }

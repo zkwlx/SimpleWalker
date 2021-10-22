@@ -8,6 +8,8 @@ version '1.1'
 
 repositories {
     mavenCentral()
+    google()
+    jcenter()
     maven {
         url "https://repo1.maven.org/maven2/"
     }
