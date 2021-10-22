@@ -1,4 +1,4 @@
-package com.zhihu.walker.visitor
+package com.zhihu.walker.dex_visitor
 
 import com.zhihu.walker.Context
 import com.zhihu.walker.utils.Log
@@ -42,6 +42,11 @@ class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClas
     private inner class InternalCodeVisitor constructor(cv: DexCodeVisitor?, val parentMethod: Method) :
         DexCodeVisitor(cv) {
 
+        override fun visitConstStmt(op: Op?, ra: Int, value: Any?) {
+            //TODO 支持保存 Runtime.exec() 命令，指令为 const_string
+            super.visitConstStmt(op, ra, value)
+        }
+
         /**
          * OP_INVOKE_VIRTUAL
          * OP_INVOKE_SUPER
@@ -57,7 +62,6 @@ class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClas
             // method.owner = Ljava/lang/Object;
             val owner = trimClassName(method.owner)
             val name = method.name
-            Log.i("found!!! ${owner}.${method.name}")
 
             policyList.filter {
                 owner == it.className

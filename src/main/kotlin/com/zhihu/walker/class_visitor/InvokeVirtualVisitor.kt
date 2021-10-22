@@ -1,4 +1,4 @@
-package com.zhihu.walker.visitor
+package com.zhihu.walker.class_visitor
 
 import com.zhihu.walker.Context
 import com.zhihu.walker.Policy
@@ -9,10 +9,10 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Opcodes.ASM9
 import java.io.File
 
-class InvokeSpecialVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisitor(ASM9, cv) {
+class InvokeVirtualVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisitor(ASM9, cv) {
 
     private val policyList: List<Policy> = Context.policyList.filter {
-        it.instruct.toUpperCase() == "INVOKESPECIAL"
+        it.instruct.toUpperCase() == "INVOKEVIRTUAL"
     }
 
     private lateinit var currentClassName: String
@@ -46,6 +46,11 @@ class InvokeSpecialVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisi
         val parentMethodDesc: String
     ) : MethodVisitor(ASM9, cw) {
 
+        override fun visitLdcInsn(value: Any?) {
+            //TODO 支持保存 Runtime.exec() 命令，指令为 ldc
+            super.visitLdcInsn(value)
+        }
+
         /**
          * 遍历对象方法的调用
          */
@@ -56,7 +61,7 @@ class InvokeSpecialVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisi
             desc: String,
             isInterface: Boolean
         ) {
-            if (opcode != Opcodes.INVOKESPECIAL) {
+            if (opcode != Opcodes.INVOKEVIRTUAL) {
                 super.visitMethodInsn(opcode, owner, name, desc, isInterface)
                 return
             }

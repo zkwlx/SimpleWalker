@@ -1,4 +1,4 @@
-#每行代表一个策略，以 ',' 分隔，含义分别是：指令类型,类名,方法名/属性名,描述
+#每行代表一个策略，以 ',' 分隔，含义分别是：class 字节码指令类型,类名,方法名/属性名,描述
 #以第一行策略为例，其含义是当源码中有通过指令 invokevirtual 调用 TelephonyManager 的任意方法时触发策略
 invokevirtual,android.telephony.TelephonyManager,all,获取手机 ID 信息
 invokespecial,dalvik.system.DexClassLoader,<init>,可能是热更新
@@ -7,7 +7,7 @@ invokevirtual,android.accounts.AccountManager,getAccounts,获取帐号列表
 invokevirtual,android.content.pm.PackageManager,getInstalled,获取已安装应用列表
 invokevirtual,android.content.pm.PackageManager,queryIntentActivit,获取已安装取应用列表
 invokevirtual,android.bluetooth.BluetoothAdapter,all,获取蓝牙信息
-getstatic,android.provider.ContactsContract$Contacts,CONTENTURI,获取联系人信息
+getstatic,android.provider.ContactsContract$Contacts,CONTENT_URI,获取联系人信息
 invokevirtual,android.net.wifi.WifiInfo,getMacAddress,获取 MAC 地址
 invokevirtual,java.net.NetworkInterface,getNetworkInterfaces,获取 MAC 地址
 invokevirtual,android.nfc.NfcAdapter,all,获取 NFC 信息

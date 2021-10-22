@@ -14,9 +14,10 @@ class Main {
     companion object {
 
         private val walkerMap = mapOf(
-//            create(JarWalker),
-//            create(AarWalker),
-            create(DexWalker)
+            create(JarWalker),
+            create(AarWalker),
+            create(DexWalker),
+            create(ApkWalker)
         )
 
         private fun create(walker: Walker): Pair<String, Walker> {

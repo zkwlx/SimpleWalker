@@ -1,4 +1,4 @@
-package com.zhihu.walker.visitor
+package com.zhihu.walker.class_visitor
 
 import com.zhihu.walker.Context
 import com.zhihu.walker.Policy
@@ -9,10 +9,10 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Opcodes.ASM9
 import java.io.File
 
-class InvokeVirtualVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisitor(ASM9, cv) {
+class InvokeSpecialVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisitor(ASM9, cv) {
 
     private val policyList: List<Policy> = Context.policyList.filter {
-        it.instruct.toUpperCase() == "INVOKEVIRTUAL"
+        it.instruct.toUpperCase() == "INVOKESPECIAL"
     }
 
     private lateinit var currentClassName: String
@@ -56,7 +56,7 @@ class InvokeVirtualVisitor(val file: File, cv: ClassVisitor? = null) : ClassVisi
             desc: String,
             isInterface: Boolean
         ) {
-            if (opcode != Opcodes.INVOKEVIRTUAL) {
+            if (opcode != Opcodes.INVOKESPECIAL) {
                 super.visitMethodInsn(opcode, owner, name, desc, isInterface)
                 return
             }

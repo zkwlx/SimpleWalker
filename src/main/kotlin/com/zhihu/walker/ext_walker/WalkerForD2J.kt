@@ -1,6 +1,10 @@
 package com.zhihu.walker.ext_walker
 
-import com.zhihu.walker.visitor.DexFileRootVisitor
+import com.zhihu.walker.dex_visitor.GetStaticDexVisitor
+import com.zhihu.walker.dex_visitor.InvokeSpecialDexVisitor
+import com.zhihu.walker.utils.StrUtils
+import com.zhihu.walker.dex_visitor.InvokeVirtualDexVisitor
+import d2j.api.visitors.DexClassVisitor
 import d2j.api.visitors.DexFileVisitor
 import d2j.reader.DexFileReader
 import java.io.File
@@ -21,8 +25,24 @@ abstract class WalkerForD2J : Walker() {
     }
 
     private fun buildClassVisitor(file: File): DexFileVisitor {
-        var visitor: DexFileVisitor = DexFileRootVisitor(file)
-        return visitor
+        return DexFileRootVisitor(file)
+    }
+
+    inner class DexFileRootVisitor(val file: File) : DexFileVisitor() {
+
+        override fun visit(
+            access_flags: Int,
+            className: String,
+            superClass: String?,
+            interfaceNames: Array<out String>?
+        ): DexClassVisitor {
+            var cv = super.visit(access_flags, className, superClass, interfaceNames)
+            val trimmedClassName = StrUtils.trimClassName(className)
+            cv = InvokeVirtualDexVisitor(file, trimmedClassName, cv)
+            cv = InvokeSpecialDexVisitor(file, trimmedClassName, cv)
+            cv = GetStaticDexVisitor(file, trimmedClassName, cv)
+            return cv
+        }
     }
 
 }

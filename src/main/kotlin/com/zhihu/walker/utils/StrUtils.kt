@@ -9,7 +9,7 @@ class StrUtils {
          */
         @JvmStatic
         fun trimClassName(name: String): String {
-            return name.substring(1 - name.length - 1)
+            return name.substring(1, name.length - 1)
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.zhihu.walker.ext_walker
 
-import com.zhihu.walker.visitor.GetStaticVisitor
-import com.zhihu.walker.visitor.InvokeSpecialVisitor
-import com.zhihu.walker.visitor.InvokeVirtualVisitor
+import com.zhihu.walker.class_visitor.GetStaticVisitor
+import com.zhihu.walker.class_visitor.InvokeSpecialVisitor
+import com.zhihu.walker.class_visitor.InvokeVirtualVisitor
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import java.io.File

@@ -1,4 +1,4 @@
-package com.zhihu.walker.visitor
+package com.zhihu.walker.class_visitor
 
 import com.zhihu.walker.Context
 import com.zhihu.walker.Policy
