@@ -1,10 +1,10 @@
 # SimpleWalker
-知乎 Android 团队使用的 Java 库静态代码检查工具，支持目录、.zip、.aar 格式，可通过配置文件添加检查策略。
+知乎 Android 团队使用的 Java 库静态代码检查工具，支持目录、.jar、.aar、.apk、.dex 格式，可通过配置文件添加检查策略。
 主要用于检查 Android 应用的三方依赖是否有调用隐私接口。
 # 使用方法
 项目工程中 release/ 目录下是最新版本的可执行文件，help 输出如下：
 ``` bash
-zkw@zkw-mint: java -jar ./SimpleWalker-1.1.jar
+zkw@zkw-mint: java -jar ./SimpleWalker-1.2.jar
 Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式) [options]
   Options:
     -h, --help
@@ -19,7 +19,7 @@ Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配
 ```
 根据参数制定输入文件和策略配置文件：
 ``` bash
-zkw@zkw-mint: java -jar ./release/SimpleWalker-1.1.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
+zkw@zkw-mint: java -jar ./release/SimpleWalker-1.2.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
 报告文件：/home/zkw/my_project/SimpleWalker/result.json
 ```
 其中默认配置文件 policy 的内容如下：
@@ -33,7 +33,7 @@ invokevirtual,android.accounts.AccountManager,getAccounts,获取帐号列表
 invokevirtual,android.content.pm.PackageManager,getInstalled,获取已安装应用列表
 invokevirtual,android.content.pm.PackageManager,queryIntentActivit,获取已安装取应用列表
 invokevirtual,android.bluetooth.BluetoothAdapter,all,获取蓝牙信息
-getstatic,android.provider.ContactsContract$Contacts,CONTENTURI,获取联系人信息
+getstatic,android.provider.ContactsContract$Contacts,CONTENT_URI,获取联系人信息
 invokevirtual,android.net.wifi.WifiInfo,getMacAddress,获取 MAC 地址
 invokevirtual,java.net.NetworkInterface,getNetworkInterfaces,获取 MAC 地址
 invokevirtual,android.nfc.NfcAdapter,all,获取 NFC 信息
