@@ -1,7 +1,6 @@
 package com.zhihu.walker.visitor
 
 import com.zhihu.walker.Context
-import com.zhihu.walker.Log
 import com.zhihu.walker.Policy
 import org.json.JSONArray
 import org.objectweb.asm.ClassVisitor

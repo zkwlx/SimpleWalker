@@ -1,4 +1,4 @@
-package com.zhihu.walker
+package com.zhihu.walker.utils
 
 class Log {
 

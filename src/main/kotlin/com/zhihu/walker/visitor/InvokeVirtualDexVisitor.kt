@@ -1,21 +1,15 @@
 package com.zhihu.walker.visitor
 
 import com.zhihu.walker.Context
-import com.zhihu.walker.Log
+import com.zhihu.walker.utils.Log
 import com.zhihu.walker.Policy
+import com.zhihu.walker.utils.StrUtils.Companion.trimClassName
 import d2j.api.Method
-import d2j.api.MethodHandle
-import d2j.api.Proto
 import d2j.api.reader.Op
 import d2j.api.visitors.DexClassVisitor
 import d2j.api.visitors.DexCodeVisitor
-import d2j.api.visitors.DexFileVisitor
 import d2j.api.visitors.DexMethodVisitor
 import org.json.JSONArray
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.MethodVisitor
-import org.objectweb.asm.Opcodes
-import org.objectweb.asm.Opcodes.ASM9
 import java.io.File
 
 class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClassVisitor? = null) :
@@ -24,9 +18,6 @@ class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClas
     private val policyList: List<Policy> = Context.policyList.filter {
         it.instruct.toUpperCase() == "INVOKEVIRTUAL"
     }
-
-    private lateinit var currentClassName: String
-
 
     override fun visitMethod(
         access: Int,
@@ -63,8 +54,10 @@ class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClas
                 super.visitMethodStmt(op, args, method)
                 return
             }
-            val owner = method.owner
+            // method.owner = Ljava/lang/Object;
+            val owner = trimClassName(method.owner)
             val name = method.name
+            Log.i("found!!! ${owner}.${method.name}")
 
             policyList.filter {
                 owner == it.className
@@ -73,7 +66,7 @@ class InvokeVirtualDexVisitor(val file: File, val className: String, cv: DexClas
             }.forEach {
                 val array = Context.outputJson[it.key] as JSONArray
                 array.put(
-                    "文件 ${file.name} 中的 $currentClassName.$parentMethod() 方法调用了" +
+                    "文件 ${file.name} 中的 $className.${parentMethod.name}() 方法调用了" +
                             " ${owner.substringAfterLast('/')}.$name()，${it.desc}"
                 )
             }

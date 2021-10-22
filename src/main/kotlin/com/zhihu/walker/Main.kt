@@ -2,6 +2,7 @@ package com.zhihu.walker
 
 import com.beust.jcommander.JCommander
 import com.zhihu.walker.ext_walker.*
+import com.zhihu.walker.utils.Log
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File

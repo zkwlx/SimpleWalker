@@ -1,13 +1,8 @@
 package com.zhihu.walker.ext_walker
 
 import com.zhihu.walker.visitor.DexFileRootVisitor
-import com.zhihu.walker.visitor.GetStaticVisitor
-import com.zhihu.walker.visitor.InvokeSpecialVisitor
-import com.zhihu.walker.visitor.InvokeVirtualVisitor
 import d2j.api.visitors.DexFileVisitor
 import d2j.reader.DexFileReader
-import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassVisitor
 import java.io.File
 import java.io.InputStream
 

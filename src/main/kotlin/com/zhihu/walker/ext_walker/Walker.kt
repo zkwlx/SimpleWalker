@@ -1,6 +1,6 @@
 package com.zhihu.walker.ext_walker
 
-import com.zhihu.walker.Log
+import com.zhihu.walker.utils.Log
 import java.io.File
 
 abstract class Walker {
