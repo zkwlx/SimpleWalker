@@ -4,7 +4,7 @@
 # 使用方法
 项目工程中 release/ 目录下是最新版本的可执行文件，help 输出如下：
 ``` bash
-zkw@zkw-mint: java -jar ./SimpleWalker-1.2.jar
+zkw@zkw-mint: java -jar ./SimpleWalker-1.x.jar
 Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式) [options]
   Options:
     -h, --help
@@ -19,7 +19,7 @@ Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配
 ```
 根据参数制定输入文件和策略配置文件：
 ``` bash
-zkw@zkw-mint: java -jar ./release/SimpleWalker-1.2.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
+zkw@zkw-mint: java -jar ./release/SimpleWalker-1.x.jar -i ~/jars/ -p ./release/policy                                                                               SIGINT(2) ↵  8711  16:55:48
 报告文件：/home/zkw/my_project/SimpleWalker/result.json
 ```
 其中默认配置文件 policy 的内容如下：
