@@ -28,7 +28,7 @@ class Main {
         fun main(vararg args: String) {
             val myArgs = Args()
             val commander = JCommander.newBuilder().addObject(myArgs).build()
-            commander.setProgramName("SimpleWalker", "一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式")
+            commander.setProgramName("SimpleWalker", "一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar、apk、dex 格式")
             try {
                 commander.parse(*args)
             } catch (e: Throwable) {
@@ -93,8 +93,18 @@ class Main {
         }
 
         private fun onFinish(outputPath: String) {
+            val json = Context.outputJson
+            val iterator = json.keys()
+            while (iterator.hasNext()) {
+                val key = iterator.next()
+                val array = json[key] as JSONArray
+                if (array.length() == 0) {
+                    iterator.remove()
+                }
+            }
+
             val outputFile = File(outputPath)
-            outputFile.writeText(Context.outputJson.toString(4))
+            outputFile.writeText(json.toString(4))
             Log.i("报告文件：${outputFile.absolutePath}")
         }
     }
