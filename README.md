@@ -1,16 +1,16 @@
 # SimpleWalker
-知乎 Android 团队使用的 Java 库静态代码检查工具，支持目录、.jar、.aar、.apk、.dex 格式，可通过配置文件添加检查策略。
-主要用于检查 Android 应用的三方依赖是否有调用隐私接口。
+知乎 Android 团队使用的静态代码检查工具，支持目录、.jar、.aar、.apk、.dex 格式，可通过配置文件添加检查策略。
+主要用于检查 Android 应用或三方依赖是否有调用隐私接口。
 # 使用方法
 项目工程中 release/ 目录下是最新版本的可执行文件，help 输出如下：
 ``` bash
 zkw@zkw-mint: java -jar ./SimpleWalker-1.x.jar
-Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar 格式) [options]
+Usage: SimpleWalker(一个简单的静态代码扫描工具，可通过文件配置，支持目录、jar、aar、apk、dex 格式) [options]
   Options:
     -h, --help
 
   * -i, --input
-      被扫描的文件，支持 jar、aar 和存放这些文件的目录
+      被扫描的文件，支持 jar、aar、dex、apk 和存放这些文件的目录
     -o, --output
       Json 报告输出文件名，默认为当前目录的 result.json
       Default: ./result.json
@@ -82,7 +82,7 @@ invokevirtual,android.net.wifi.WifiManager,getConnectionInfo,获取 WIFI 信息
   ]
 }
 ```
-从报告中可以看到 jar 或 aar 包中的 class 中对敏感函数的调用关系，使用者可以根据此报告对第三方 SDK 做简单判断。
+从报告中可以看到 jar、aar、apk 或 dex 包中的 class 中对敏感函数的调用关系，使用者可以根据此报告对第三方 SDK 做简单判断。
 # 编译方法
 ``` bash
 ./gradlew jar
@@ -91,6 +91,13 @@ jar 文件的输出目录是
 ``` bash
 ./build/libs/SimpleWalker-x.x.jar
 ```
+# Change Log
+### 1.3
+优化输出 json 内容：删除未检测出的策略项
+### 1.2
+增加 apk、dex 文件格式的分析
+### 1.1
+格式化输出 json
 # 参考
 [asm](https://gitlab.ow2.org/asm/asm)  
 [dex2jar](https://github.com/pxb1988/dex2jar)
