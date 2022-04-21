@@ -101,3 +101,9 @@ jar 文件的输出目录是
 # 参考
 [asm](https://gitlab.ow2.org/asm/asm)  
 [dex2jar](https://github.com/pxb1988/dex2jar)
+
+* * *
+
+欢迎关注我的公众号 `二叉树根子`，在这里可以看到不曾见过的 Android 底层技术。
+
+<img width="258" height="258" alt="公众号" src="binary tree root.jpg">
